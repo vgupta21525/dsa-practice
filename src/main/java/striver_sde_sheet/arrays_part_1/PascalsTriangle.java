@@ -63,4 +63,10 @@ public class PascalsTriangle {
         return triangle;
     }
 
+    public static void main(String[] args) {
+        PascalsTriangle solution = new PascalsTriangle();
+        solution.generatePascalTriangle(10);
+        solution.pascalTriangleElement(6, 3);
+    }
+
 }
