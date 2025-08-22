@@ -7,7 +7,7 @@ import java.util.Set;
 * Problem: Given a 2D integer matrix, update the matrix such that all the elements of a row should be 0 if any
 * element in row is 0 and all elements of a column should be 0 if any element in column is 0.
 *
-* Leetcode Link: https://leetcode.com/problems/set-matrix-zeroes/description/
+* Leetcode Link: https://leetcode.com/problems/set-matrix-zeroes/
 */
 public class SetMatrixZeros {
 
@@ -22,7 +22,7 @@ public class SetMatrixZeros {
     * Time Complexity: O(m * n)
     * Space Complexity: O(m + n)
     */
-    public void setZeros_v1(int[][] matrix) {
+    public void setZerosBruteForce(int[][] matrix) {
         final int rows = matrix.length;
         final int cols = matrix[0].length;
         Set<Integer> rowsWithZero = new HashSet<>();
@@ -58,7 +58,7 @@ public class SetMatrixZeros {
     * Time Complexity: O(m * n)
     * Space Complexity: O(1)
     */
-    public void setZeroes(int[][] matrix) {
+    public void setZeroesOptimal(int[][] matrix) {
         final int rows = matrix.length;
         final int cols = matrix[0].length;
         boolean zeroInFirstRow = false;
@@ -109,6 +109,15 @@ public class SetMatrixZeros {
         for (int row = 0; row < rows; row++) {
             matrix[row][col] = 0;
         }
+    }
+
+    public static void main(String[] args) {
+        int[][] input1 = {{1, 1, 1}, {1, 0, 1}, {1, 1, 1}};
+        int[][] input2 = {{0, 1, 2, 0}, {3, 4, 5, 2}, {1, 3, 1, 5}};
+
+        SetMatrixZeros solution = new SetMatrixZeros();
+        solution.setZerosBruteForce(input1);
+        solution.setZeroesOptimal(input2);
     }
 
 }
