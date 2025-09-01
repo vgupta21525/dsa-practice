@@ -1,7 +1,12 @@
 package striver_sde_sheet.arrays_part_1;
 
+import java.util.Arrays;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
 /*
 * Problem: Given an array of integers, find the sub array with the maximum sum of elements and then return that sum.
+* Variation: Print the sub array with the maximum sum.
 *
 * Leetcode Link: https://leetcode.com/problems/maximum-subarray/
 */
@@ -79,6 +84,39 @@ public class MaxSubArraySum {
         return maxSubArraySum;
     }
 
+    /*
+    * Variation: Print the sub array with the maximum sum.
+    * Approach: We will use the optimal approach and store the starting and ending indices of the sub array.
+    *
+    * Complexity Analysis
+    * n = size of the input array
+    * Time Complexity: O(n)
+    * Space Complexity: O(1)
+    */
+    public void maxSubArrayPrint(int[] nums) {
+        int maxSubArraySum = Integer.MIN_VALUE;
+        int startIndex = 0;
+        int endIndex = 0;
+        int currentSum = 0;
+        for (int index = 0; index < nums.length; index++) {
+            currentSum += nums[index];
+            if (currentSum > maxSubArraySum) {
+                maxSubArraySum = currentSum;
+                endIndex = index + 1;
+            }
+            if (currentSum < 0) {
+                currentSum = 0;
+                startIndex = index + 1;
+            }
+        }
+        printArray(nums, startIndex, endIndex);
+    }
+
+    private void printArray(int[] nums, int startIndex, int endIndex) {
+        IntStream.range(startIndex, endIndex).forEach(index -> System.out.println(nums[index] + " "));
+        System.out.println();
+    }
+
     public static void main(String[] args) {
         int[] input1 = {1};
         int[] input2 = {5,4,-1,7,8};
@@ -88,6 +126,7 @@ public class MaxSubArraySum {
         int output1 = solution.maxSubArrayBruteForce(input1);
         int output2 = solution.maxSubArrayBetter(input2);
         int output3 = solution.maxSubArrayOptimal(input3);
+        solution.maxSubArrayPrint(input3);
     }
 
 }
